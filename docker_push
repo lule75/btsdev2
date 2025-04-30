@@ -7,4 +7,4 @@ if test -z "$VERSION"; then
 fi
 
 set -e
-docker buildx build --platform linux/arm64,linux/amd64,linux/arm/v7 -t lule75/bts:"$VERSION" -t lule75/bts:latest --push .
+docker buildx build --platform linux/arm64,linux/amd64,linux/arm/v7 -t lule75/btsdev2:"$VERSION" -t lule75/btsdev2:latest --push .
