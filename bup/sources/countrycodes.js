@@ -51,9 +51,7 @@ var IOC_TABLE = {
  	'KAS': 'Kawanda Secondary School',
  	'GHS': 'Gayaza High Schoool',
  	'TCN': 'Trinity College Nabbingo',
- 	
- 
-
+	
 };
 
 function lookup(code) {

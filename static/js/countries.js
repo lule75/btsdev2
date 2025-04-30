@@ -3,7 +3,7 @@ var countries = (function() { // eslint-disable-line no-unused-vars
 function lookup(code) {
 	const res = countrycodes.TABLE[code];
 	if (!res && (code !== 'unknown')) {
-		cerror.silent('Unknown country ' + JSON.stringify(code));
+		cerror.silent('Unknown country/School ' + JSON.stringify(code));
 	}
 	return res || code;
 }

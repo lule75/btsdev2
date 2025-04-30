@@ -3,7 +3,7 @@
 
 var cerror = (function() {
 
-var REPORT_URL = 'https://aufschlagwechsel.de/bupbug/';
+var REPORT_URL = '#https://aufschlagwechsel.de/bupbug/#';
 var count = -1;
 var error_list = [];
 var report_enabled = true;
