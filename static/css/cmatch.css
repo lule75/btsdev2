@@ -1,0 +1,150 @@
+.match_save_button {
+	font-size: 120%;
+	padding: 9px 3px;
+}
+
+.match_num {
+	text-align: right;
+}
+
+.match_edit_button,
+.match_scoresheet_button,
+.match_rawinfo {
+	display: inline-block;
+	width: 1em;
+	min-width: 1em;
+	height: 1em;
+	min-height: 1em;
+	background-size: 100%;
+	opacity: 0.5;
+}
+.match_edit_button {
+	background-image: url(../icons/edit.svg);
+}
+.match_scoresheet_button {
+	margin: 0 0 0 0.3em;
+	background-image: url(../icons/scoresheet.svg);
+}
+.match_rawinfo {
+	margin: 0 0.3em 0 0.3em;
+	background-image: url(../icons/rawinfo.svg);
+}
+
+.edit_match_container {
+	text-align: left;
+}
+.edit_match_container > div {
+	margin: 0.2em 0;
+}
+.edit_match_container > div > span {
+	display: inline-block;
+	padding-left: 1em;
+}
+
+.match_edit_button:hover,
+.match_scoresheet_button:hover {
+	opacity: 1;
+}
+
+.match_table {
+	border-collapse: collapse;
+}
+.match_table > thead > tr > th {
+	text-align: left;
+}
+.match_table > tbody > tr:hover > td {
+	background: #ddd;
+}
+
+.match_cancel_link {
+	margin-top: 1em;
+}
+.match_label {
+	font-size: 80%;
+	text-align: right;
+	color: #666;
+}
+.match_team2 {
+	padding-right: 1em;
+}
+.match_vs {
+	color: #999;
+	padding: 0 0.5em;
+}
+.match_team_won {
+	font-weight: bold;
+}
+.match_score_current {
+	font-weight: bold;
+}
+.match_shuttle_count {
+	white-space: pre;
+	text-align: right;
+	padding-left: 1em;
+}
+.match_shuttle_count span::after {
+	content: '';
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+}
+.match_shuttle_count span.match_shuttle_count_display_active::after {
+	background-image: url("../../bup/icons/shuttle.svg");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.match_no_umpire {
+	font-style: italic;
+}
+
+.single_scoresheet {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%; /* legacy */
+	width: 100vw;
+	height: 70.71067811865474vw; /* 100 / √2  (ratio of DIN A) */
+	max-width: 141.4213562373095vh;
+	max-height: 100vh;
+}
+
+
+.match_scoresheet_buttons {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	height: 6vmin;
+	bottom: 5vh;
+	font-size: 4vmin;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.match_scoresheet_buttons > * {
+	display: block;
+}
+.match_scoresheet_buttons > button {
+	margin: 0 0 0 2vmin;
+	font-size: 5vmin;
+	padding: 0.1em 0.1em;
+	min-width: 5em;
+}
+
+.match_umpire_style_umpires {
+	font-weight: bold;
+}
+
+
+@media print {
+	.toprow,
+	.main,
+	.ticker_status,
+	.btp_status,
+	.errors,
+	.status,
+	.match_scoresheet_buttons {
+		display: none;
+	}
+}

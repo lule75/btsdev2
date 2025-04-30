@@ -1,0 +1,615 @@
+auto-determine password!?
+
+public note for game (and show that in upcoming!)
+
+per-match colors!
+	should be changeable during the game too
+
+flag to stop receiving updates from BTP for a match
+
+check bug: external edit of match in BTP should be reflected in admin view & upcoming
+
+upcoming: only show if same date (or white block if new date)
+
+get clocks from btp
+	setting 1303: pause
+	<LastTimeOnCourt> for players
+
+ticker: insert bup
+
+mario docker
+
+Stijn CP!
+
+public note to a game, show in upcoming and other views
+
+/d1?dm_style=blahbah
+
+link and test scoresheet PDF generator
+
+unknown country esp
+
+games without time to bottom of list
+
+prevent crash if BTP parsing fails!
+
+optimize docker image! no puppeteer etc.
+
+de_at (-> mail georg)
+
+basic to_stats
+
+log battery+devices, red warning
+
+sync from BTP + show in settings:
+	location
+	tournament days
+show location + days in TO stats
+
+umpire management
+
+do not sync automatically if autosync is inactive
+filtering in UI
+
+log sent results
+
+ticker show time of last update, and handle problems
+
+ticker: date in local timezone
+
+BTP status: Synchronisations-Fehler: TypeError: Cannot read property '0' of undefined at Object.get_btp_state (/home/phihag/projects/bts/bts/btp_parse.js:104:39) at Object.fetch (/home/phihag/projects/bts/bts/btp_sync.js:339:25) at send.response (/home/phihag/projects/bts/bts/btp_conn.js:117:13) at send_request (/home/phihag/projects/bts/bts/btp_conn.js:155:4) at btp_proto.decode (/home/phihag/projects/bts/bts/btp_conn.js:65:11) at decode_string (/home/phihag/projects/bts/bts/btp_proto.js:302:3) at decode_string (/home/phihag/projects/bts/bts/btp_proto.js:283:2) at Object.decode (/home/phihag/projects/bts/bts/btp_proto.js:288:2) at send_raw_request (/home/phihag/projects/bts/bts/btp_conn.js:62:13) at Socket.client.on (/home/phihag/projects/bts/bts/btp_conn.js:47:3)
+btp_parse errors should be reported
+
+srstats
+
+ticker: iphone 7
+
+watch ticker and alert if not changed since (or watch error)
+
+dmu19 countries not synced
+
+undefined appears in countries
+
+option to reindex after deleting match in BTP!!!
+
+compare clocks
+
+ticker:
+	2 wide on large screens
+	seeding (-> Dario)
+
+link to button presses ("stats")
+
+to_stats as PDF
+
+docker image
+	for ticker (include nginx)
+
+option to delete a tournament (-> Mario)
+
+improve all courts
+
+upcoming
+
+device status
+
+onlynames: background player name instead of icon
+
+device a warning for match started without umpire name
+
+script to download (raw / json / ...)
+	test cases that loading works
+	load from -x XML
+	load from JSON
+
+check that we sync umpire nationality
+	write test case
+
+btp status should be "synchronized", not "eingeloggt"
+
+clients should report battery + status 
+
+upcoming matches
+
+umpire assignment
+
+umpire + court assignment
+
+show IP in UI
+
+show tournament tree
+
+queue of upcoming matches
+
+In umpires view link to last match of each umpire (easy to find scoresheet)
+
+provide and document make update (as an alias to deps?)
+
+automated download should not fire all the time
+
+fix updating settings
+
+msg Gregor again of changes
+
+colors for teams per match!
+
+list devices
+	devices should report court, current match id, battery charging, battery level
+
+scoresheet should show scheduled time
+
+rework ways to save changes to BTP
+
+export/import tournament
+
+show duration at mouseover
+
+cap end_ts to our time
+
+umpire management
+	overview of umpires + oncourt + last match (how long ago)
+	include upcoming matches
+	button set umpire of match (read before)
+
+option to hide match (at least from UI, maybe from umpires)
+
+do not accept if fewer presses!
+	write a test case
+
+test that realtime sync works if disconnect
+
+correct sync of walkover
+
+check that we sync correctly even if multiple changes (checkbox: allow changes from BTP, default on)
+
+link to presses view
+
+ui should show whether 0:0 or warmup
+
+sync notes / highlights
+
+support renaming of umpires
+
+overview: very slightly color alternate lines
+
+test state sync live, fetch whole state in intervals
+
+scoresheet to PDF printing looks wonky
+
+flash red if mark
+
+mode international should show discipline
+
+light referee mode
+	submit battery if available and flagged
+	submit umpire name
+
+semi-automatic match control: show next 4 matches, flash if empty court
+
+prevent setting a match to 0:0 (and log in console or database!) if match is already done
+
+display next matches
+
+autosync tournament name from BTP
+
+check if switching to other tab and back works
+
+ticker: allow overriding all from different tournaments (clear if != tournament)
+
+clean umpire ui for bup
+
+test groups btp
+
+test resigning btp
+
+test walkover btp
+
+fix sync of retired
+
+check umpire syncing after match start
+
+make update_score async (and catch errors)
+
+more tests for update_score (->Georg)
+
+sync umpire nationaliy
+
+handle no nationality correctly in edit screen
+
+doc installation (+docker)
+
+ticker: nicen up
+ticker: show statistics
+ticker: force language
+
+doc usage (e.g. locking, handles etc.)
+
+nationstats should include umpires
+
+logo preview should update automatically (when somebody else changes it)
+
+program to record and compare state
+
+scoresheets should also update automatically
+
+edit umpires
+
+clear btp sync errors
+
+umpire report (including discpline)
+
+advanced filtering (by court etc.)
+
+improve allscoresheets
+	font size
+	i18n doc title
+	should also store JSON
+	link to (at bottom, include nationstats as well)
+
+mirror another instance (this checks the proto)
+
+export URL to export everything (+ SHA256)
+
+option to hide match from bup list, fade out in our list
+bup: show nationality in choice of server / receiver
+
+bup btsh should update event (e.g. color)
+
+bup: dual-color everything
+
+when deleting a match reset court if it got that match
+
+active players list for finals
+
+change title
+
+logo preview should update immediately
+logo preview should incorporate bg color
+logo preview should show foreground color
+
+store colors
+
+report serror if property missing in editing but exists in current setup
+display next matches
+
+resync a match option
+
+support http://www.cup2000.com/tournament-software/
+
+umpire handling
+	swap between umpire and AR
+	drag&drop anywhere
+	promote first umpires to match
+	display state
+
+automatically print (on different machine, as client)
+
+not moved on court: lesser opacity
+
+heartbeat, show if device is disconnected
+
+edit shuttle count
+
+sync highlight
+
+changing match in bts should not destroy nationalities!
+
+shuttle stats per day (+ number of matches, average)
+
+referee view
+
+link to allscoresheet
+
+transmit device id | device name | battery state (if present)?
+
+entering into scoresheet and going back is broken, need to back out
+
+smaller print buttons -> Marcel
+
+automatically print if something special happens -> Marcel
+
+use bup's flag
+
+bts fix changing stuff from bts and in BTP
+
+transmit retired status to BTP
+
+
+make referee view
+referee view
+	add (ws?) API
+	courts
+	upcoming games?
+	flashing red when referee
+	highlight nearly done matches
+	umpire
+	last matches?
+	upcoming matches?
+	shortcut /r
+
+switch to promises
+
+order unassigned matches by date + time
+
+should not update automatically on start
+
+better name for qualifications
+
+helper program to get all data from BTP, as binary or as JSON
+
+
+itest changing service judge in UI
+
+allow marking one tournament as active
+
+better error if ticker URL is invalid
+
+doc ticker
+
+bup display increase font size
+bup display flags
+
+start itests?
+
+referee-like mode remote ocntrol
+
+changing settings should not jump, but get confirmation
+
+debug view to see all changes sent
+
+translate everything
+
+clarify bup setup & update
+
+relay to another host?
+
+write Dockerfile
+
+umpire stats (also by event / discipline?)
+
+settings: use i18n names in dm_style
+
+translate btp status / ticker status
+
+set only one main tournament at a time
+
+add large test suite for BTP / LP
+
+when language changes automatically update everybody (including links to bup)
+
+fix league + normal, add lots of test cases
+
+umpire view (also allow to see / edit internal IDs)
+
+bupdate
+
+link to stats
+make run should be in a loop with autorestart
+feature: force language for tournament
+ghost games?
+Spiel-Status manuell aus btp ziehen, override our state
+Ansicht Turnierbaum
+editing tournament name fails
+show upcoming games only
+show current + upcoming games
+
+bug: going to scoresheet fails, going back fails as well
+option to hide matches without time fro main view
+
+
+flag
+
+setting btp data fails for some reason sometimes
+english in tournament options
+correct handling of retired
+country a little larger on display
+
+
+-----
+
+referee view:
+	used shuttles per court
+	cards if any
+	duration
+	Referee
+	mark if duration is very long
+	highlight if close to end
+
+lint
+show duration for finished matches
+score update freezes from time to time
+BLP support
+support service judges
+umpire editing dialog
+match throws error
+technical export should be supported by bup
+Dockerfile for bts
+Dockerfile for btsticker
+----
+
+test ticker on mobile
+add umpires / service judges UI
+select service judge in UI
+use websocket protocol
+
+
+----
+
+discover what happened in bts error reports
+team event creation
+go into match stats
+scoresheet in realtime
+make unnecessary matches disappear by editing them
+
+push all changes to BTP
+button "not my match!"
+d/moritz: game points may not match reality
+d/moritz: show court number
+server identity is missing in displaymode
+
+move BTP into separate process and only communicate differences
+dedup matches
+test
+	distinguish and handle walkovers
+
+test undo after match end!
+nicer error when network fails
+add button to hide matches from umpires
+separate submodules so that a crash in BTP | Ticker does not cause problems for the rest
+
+simple mode (disallow scrolling)
+
+----
+
+admin-view of upcoming matches (Joanna)
+put update_req in try..catch
+changes after match are not taken over to BTP
+mark all matches in need of sync
+
+fetch program
+	fetch binary and store it
+
+ui: raw change feed, not if significant
+overload in system when loading from BTP -> move this into separate process
+	write script to sync manually, see diff
+	script to fetch manually
+no-show matches
+
+install keep screen on
+9: negative timer
+btp: test leaving out umpires in update requests?
+
+----
+
+move BTP parsing into a separate process
+write a proto for incremental updates
+
+show devices incl charging/discharging + charge state
+display for match control (take off once finished)
+make btp IDs configurable
+btp settings change fails sometimes!
+show stats from UI
+tests for parsing the matches from BTP
+	with walkover etc.
+order of upcoming matches sorts only by time, not date
+connectivity problems?
+backup at ticker
+	spinner which resolves to ok/fail
+generate PDFs automatically
+	launch external program on match completion
+
+game number into PDF name if present!
+move off court 30s after match is finished if this match is still on court
+	option
+better process name
+
+Eine PDF-Datei || alle PDF-Dateien -> Momme
+button to move off court
+button to move on court
+assert that bupdate does not leave tmp dirs
+
+set up backup displays
+new display (Moritz)
+too small on Opera devices
+WebSocket protocol for displays?
+auto-fetch from BTP: test new code
+
+
+manually make a match on court the one that is being played
+
+---
+
+siege
+btp: calc match players directly, don't go into the tree of From
+make an app for fullscreen and finding
+start BTP API
+	on start transmit everything to BTP that's marked
+	transmit umpire changes to BTP
+	transmit court change to BTP
+
+	button to push a match now
+	automatically push when BTP becomes available (everything marked with needsync)
+	automatically resync from time to time
+	updated team1_won from BTP
+
+test BTP readonly
+show duration in UI
+custom created matches must get a compatible match ID (and forbid changing the number)
+improve BTP API
+	make sure to catch timeouts and other net errors, test coming and going out
+	make sure all catches are correct
+	test resigning
+	transmit changes to BTP
+	transmit changes in umpires to BTP
+
+store whether pushing successful in our own db
+allow changing btp ID in manual matches (autocalc sensibly)
+go into finished match
+move to court button
+HTTP API: suppress cache
+manually set current match on court
+
+support groups
+launch link allcourts-display
+edit umpire list
+allow adding new umpire for match
+
+websocket conn for bup clients
+bup listing via websocket
+bup transmit via websocket
+bup delta transmit
+keepalives
+set current match
+
+update admin clients on match changes
+bup start on match
+scoresheet from UI
+delete matches (with proper warning)
+
+-------
+
+player who is left/right not transmitted to display
+keepalive for conn to ticker
+ticker: update status when enabling / disabling
+admin keepalive
+basic left-right layout
+allow to enter bup to finished match
+
+online ticker
+display one/all courts
+scoresheets should get updated in real time!
+
+move match to court via drag&drop
+make an android app
+	bup
+	automatically find server IP
+	wakelock
+	fullscreen
+
+btss: check time
+all courts
+online display server
+show BTP match IDs in UI and allow to edit them
+umpire selection: show estimated time to next
+show number of shuttles used
+
+-----
+scoresheet: better PDF filenames (in tournament mode)
+ticker: use websocket
+transmit shuttle count
+umpire management by referee
+delete court (ask before)
+show error upon match creation
+add team (country) names on umpire sheet
+support for BTP match highlight
+ticker: serve state
+ticker: fall back to HTTP queries if no websocket available
+ticker: highlight changes
+
+-----
+search for all matches by one player (with shortcut)
+grep for all TODOs
+auth?
+keep data in automanaged git repo?
+regular backups?
+test t4s laptop for a longer time (hangs?)

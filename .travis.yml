@@ -1,0 +1,26 @@
+sudo: false
+
+language: node_js
+node_js:
+  - 10
+  - 11
+  - 12
+  - node
+env:
+  - CXX=g++-6
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+
+before_script:
+  - make deps
+script:
+  - make test
+  - make lint
+notifications:
+  email:
+    - lule75@gmail.com
+

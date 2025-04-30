@@ -1,0 +1,23 @@
+DirectoryIndex index.html
+
+AddType text/cache-manifest .appcache
+
+<filesMatch "^cachesw.js$">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache, no-store, must-revalidate"
+</IfModule>
+</filesMatch>
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+RewriteRule ^bup.appcache - [L,R=404]
+
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} aufschlagwechsel.de
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [NC,R=301,L]
+</IfModule>
+
+# badmintonticker.de: force 404 for appcache
+ErrorDocument 404 default

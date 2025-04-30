@@ -1,0 +1,15 @@
+DirectoryIndex slides.html
+
+RewriteEngine On
+
+Options -MultiViews
+RewriteRule ^tickers$ tickers.de.html [L]
+
+RewriteRule ^checkliste?/?$ https://github.com/phihag/bup/blob/master/doc/checklist.de.md [L,R=302]
+
+RewriteCond $0#%{REQUEST_URI} ^([^#]*)#(.*)\1$
+RewriteRule ^.*$ - [E=BASE:%2]
+RewriteRule ^manual\.de\.html$ %{ENV:BASE} [L,R=301,NC]
+RewriteRule ^ticker/?$ %{ENV:BASE}tickers [L,R=301,NC]
+RewriteRule ^tickers/$ %{ENV:BASE}tickers [L,R=301,NC]
+

@@ -1,0 +1,164 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	font-family: 'Droid Sans', Arial, sans-serif;
+	height: 100%;
+}
+
+input,
+textarea,
+select {
+	font-size: inherit;
+}
+
+.main {
+	padding: 0 0 0 1em;
+}
+
+h1 {
+	margin: 0;
+}
+h3 {
+	margin: 0;
+}
+
+.connecting {
+	position: fixed;
+	top: 45%;
+	left: 0;
+	right: 0;
+	text-align: center;
+	background: rgba(255, 255, 255, 0.8);
+	font-size: 50px;
+}
+
+.status {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	color: #666;
+	background: rgba(255, 255, 255, 0.8);
+}
+.btp_status {
+	position: fixed;
+	bottom: 1.5em;
+	right: 0;
+	color: #666;
+	background: rgba(255, 255, 255, 0.8);
+}
+.ticker_status {
+	position: fixed;
+	bottom: 3em;
+	right: 0;
+	color: #666;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+
+.errors {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	color: #f00;
+	background: rgba(255, 255, 255, 0.8);
+	white-space: pre-wrap;
+}
+
+.vlink,
+a:link,
+a:visited {
+	color: #00e;
+	cursor: pointer;
+	text-decoration: none;
+}
+.vlink:hover,
+a:hover {
+	text-decoration: underline;
+}
+
+.uneditable {
+	cursor: not-allowed;
+}
+
+.tournament_referee_view_link,
+.tournament_btp_fetch,
+.tournament_ticker_push,
+.tournament_settings_link {
+	float: right;
+	margin-right: 0.5em;
+}
+
+.tournament_settings fieldset {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+}
+.tournament_settings > label,
+.tournament_settings fieldset > label {
+	display: block;
+}
+.tournament_settings > label > span,
+.tournament_settings fieldset > label > span {
+	display: inline-block;
+	min-width: 5em;
+}
+
+.dialog_bg {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1000;
+	background-color: rgba(0, 0, 0, 0.9);
+	text-align: center;
+}
+.dialog {
+	display: inline-block;
+	background-color: rgba(255, 255, 255, 1);
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	padding: 1em;
+}
+
+.nationstats_table tr:nth-child(odd) td {
+	background: #eee;
+}
+
+.footer_links {
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+.footer_links > * {
+	display: inline-block;
+}
+.footer_links > * + * {
+	margin-left: 1em;
+}
+
+table.striped-table {
+
+}
+
+
+.main_upcoming {
+	background: #000; color: #fff;
+	position: fixed; left: 0; right: 0; top: 0; bottom: 0;
+	padding: 0 0;
+	font-size: 35px;
+	cursor: none;
+}
+.upcoming_table {
+	border-collapse: collapse;
+}
+.upcoming_table td {
+	padding-bottom: 0.3em;
+	vertical-align: top;
+
+}
+.upcoming_table td:not(:first-child) {
+	padding-left: 0.3em;
+	white-space: pre-wrap;
+}

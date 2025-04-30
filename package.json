@@ -1,0 +1,34 @@
+{
+	"name": "bts",
+	"version": "1.0.0",
+	"author": "Philipp Hagemeister <phihag@phihag.de>",
+	"description": "Badminton Tournament Server",
+	"scripts": {
+		"test": "mocha test/"
+	},
+	"dependencies": {
+		"argparse": "^1.0.10",
+		"async": "*",
+		"body-parser": "*",
+		"express": "*",
+		"extract-zip": "*",
+		"nedb": "*",
+		"pretty-data": "^0.40.0",
+		"request": "^2.88.0",
+		"rimraf": "*",
+		"serve-favicon": "*",
+		"text-encoding": "^0.7.0",
+		"uuid": "^3.3.2",
+		"ws": "*",
+		"xmldom": "*"
+	},
+	"devDependencies": {
+		"acorn": "^6.1.1",
+		"eslint": "*",
+		"mocha": "*",
+		"stylelint": "*",
+		"stylelint-config-standard": "*",
+		"supervisor": "*"
+	},
+	"private": true
+}

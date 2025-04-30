@@ -1,0 +1,287 @@
+This document explains common data structures in bup and related projects. * denotes a required key. Types start with a Capital letter.
+
+Event is the root data structure for the whole state, but these structures are also used in other contexts.
+
+
+
+Event
+=====
+
+all_players     2-element list (home/away), each element is a list of all Players that can play for the team.
+                gender key required for each player.
+backup_players  2-element list (home/away), each element is another list of Player that can substitute on injury.
+                gender key required for each player. These players can fill in in case of injury.
+present_players 2-element list (home/away), each element is another list of Player.
+                gender key required for each player. These players are present in the hall (e.g. injured, coaching).
+listed_players  Order of players listed in the setup sheet. 2 element list(home/away).
+                Each element is a dictionary with the keys "m" and "f".
+                Each element of that dictionary is an array for each Player.
+courts          An array describing the current configuration of Courts.
+id              Globally unique event id, e.g. "CourtSpot:2016-bundesliga-refrath vs bischmisheim"
+league_key      ID of the league being played.
+                This determines which event sheets are available, what the rest times are, how the umpires get paid.
+                Strongly recommended if applicable.
+
+                Available values:
+                - German (1.&2.) Bundesliga:
+                   Season 2020/2021 (5x11_15 with 90s intervals): "1BL-2020", "2BLN-2020", "2BLS-2020"
+                   Season 2019/2020 (5x11_15 with 90s intervals): "1BL-2019", "2BLN-2019", "2BLS-2019"
+                   Season 2018/2019 (5x11_15 with 90s intervals): "1BL-2018", "2BLN-2018", "2BLS-2018"
+                   Season 2017/2018 (5x11_15 with 90s intervals): "1BL-2017", "2BLN-2017", "2BLS-2017"
+                   Season 2016/2017 (5x11_15, new Excel-based forms): "1BL-2016", "2BLN-2016", "2BLS-2016"
+                   Season 2015/2016 (3x21): "1BL-2015", "2BLN-2015", "2BLS-2015"
+                - German Regionalliga:
+                   RL West: "RLW-2016"
+                   RL Nord: "RLN-2016"
+                   RL Mitte: "RLM-2016"
+                   RL SüdOst: "RLSO-2019"
+                   RL SüdOst Ost / RL SüdOst Süd: "RLSOO-2017", Süd: "RLSOS-2017"
+                - NRW-Oberliga: "NRW-O19-GW-OL-002-2016", "NRW-GW-O19-OL-003-2016".
+                - Lower NRW leagues: Lots of IDs like "NRW-O19-S1-KK-194-2016". Replace in this example:
+                  S1: is the district (one of N1, N2, S1, S2)
+                  KK: the league abbreviation (one of VL, LL, BL, BK, KL, KK)
+                  194: the league number (004 for Verbandsliga Nord 1, 005 for Verbandsliga Nord 2 etc.)
+                  2016 is always literally 2016.
+                - BayernLiga and below: "bayern-2018"
+                - Oberliga Mitte "OLM-2020" and Oberliga Südwest "OLSW-2020"
+                - Swiss NLA/NLB: "NLA-2017" (3x21) or "NLA-2019" (5x11)
+                - Austrian Bundesliga: "OBL-2017"
+                - International matches: "international-2017" (each discipline once, 3x21)
+
+                The year is the first year that the specific ruleset was implemented in.
+                If the rules and descriptions of the league don't change (at least as far as bup is concerned), the same league_key is kept for later seasons.
+counting        Default counting scheme. Implicitly set by league_key.
+                Set this for events without league_key.
+                Available values:
+                  "3x21"       BWF since 2016
+                  "5x11_15"    BWF 2016 Experiment Option 1 (5x11 until max. 15)
+                  "5x11/3"     BWF 2016 Experiment Option 2 (5x11 with 3 point challenge)
+                  "5x11_15^90" German Bundesliga 2017- (5x11 until max. 15, 90s intervals)
+                  "5x11_15~NLA"NLA 2019 (5x11 until max. 15, 120s intervals, 60s in final game)
+                  "2x21+11"    2x21, 3rd game until 11
+                  "5x11_11"    UAE (5x11 sudden death)
+                  "1x21"       One Game (1x21)
+                  "1x11_15"    One Game 2016 Experiment Option 1 (1x11 until max. 15)
+                  "3x15_18"    Shortened (3x15 until max. 18)
+location        Location name and address as a string, e.g. "SpH Steinbreche"
+loc_coords      Location geocoordinates, e.g. {"lat" : 50.9582384, "lng" : 7.1118084"}
+                An object with the keys "lat" and "lng".
+matches*        A list of matches to be played (see below)
+preferred_order Array of eventsheet_id (recommended) or match_name values that indicate the best order of matches as set by the tournament organizers.
+                Example: ["MS1", "WS", "MS2", "MD1", "WD", "MD2", "MX"].
+protest         Text describing the protest of one team,
+                e.g. "Court extremely slippery (Home team, 19:00)"
+team_competition* Are players competing for their teams(true) or for themselves(false)?
+                Affects announcements.
+nation_competition Are players competing under their nation's banner?
+                true for international tournaments, false or unset otherwise.
+away_first      Boolean. If true, the guest team is mentioned first in announcements.
+team_names      Array of home and away team name. Required for team competitions.
+                Example: ["TV Refrath", "BC Bischmisheim"]
+team_shortnames Array of short home and away team names.
+                Example: ["Refrath", "Bischmisheim"]
+team_abbrevs    Array of home and away team name abbreviation (3 letters).
+                Example: ["TVR", "BCB"]
+team_colors     Array of home and away team colors (in #aabbcc format).
+                Example: ["#ffffff", "#0000f3"]
+umpires         String describing umpires (for eventsheet), e.g. "Barbara Bub & Klaus-Michael Becker"
+referee         Name of the referee, e.g. "Carsten Koch".
+starttime       Human-readable official start time, e.g. "19:00"
+date            Human-readable official day of match, e.g. "12.3.2017"
+matchday        Match day according to league plan, e.g. "1" (first game of the season) or "semi-finals"
+notes           Non-protest notes, e.g. "Bundesliga logo missing on front of information sheet"
+spectators      Estimate (or precise number) of spectators, e.g. 243 or "about 250"
+event_name      Name of the event (will be present on scoresheet), e.g. "Finals".
+                Will be calculated from team_names if those are present.
+tournament_name Name of the overall tournament (will be present on scoresheet),
+                e.g. "1. Bundesliga 2018/2019".
+                Generated from league_key if not present (this is recommended).
+tournament_logo_url An URL for a logo of this tournament, to use as a default graphic.
+tournament_logo_background_color CSS background color behind the logo.
+tournament_logo_foreground_color CSS color for text in front of the logo.
+series_name     Name of the tournament series.
+                Will be used on selected event report sheets.
+                e.g. "Mannschaftsmeisterschaft Bayern 2018/2019"
+cancelled       true to indicate that the match has been cancelled, e.g. because a team retracted or due to unforeseen circumstances.
+confirmed       true iff the result of this team match has been confirmed by the league organizers.
+last_update     UNIX timestamp in ms: Date of last change to this event
+report_urls     An array of URLs where the result can be exported to.
+minreqs_met     Boolean: true if the league/tournaments minimum requirements (e.g. advertisements, facilities, staff etc.) are met.
+                Used in some event sheets.
+
+Court
+=====
+
+court_id*     ID of this court (often a number, can also be 2017dm_hall1_12)
+label         A short, human-readable name for the court. ("Big hall 12")
+description   Description of where this court is.
+match_id      The match_id property of the Match currently being played on this court.
+chair         "west" - Umpire chair to the west at displaymode,
+              "east" - Umpire chair to the east of the displaymode.
+
+
+Match
+=====
+
+setup*        All properties that don't change during the match. A Setup object.
+presses       Array of Press, contains all button presses in the match so far.
+incomplete    Boolean. If set then the match is not yet ready to be started,
+              for instance because no players have been assigned yet.
+
+The following properties of a match are only relevant for network communication:
+
+presses_json  JSON encoding of presses (in order to not construct a large number of objects)
+network_score The score displayed in the network system
+              (may be different to actual score in case of retiring or disqualification).
+              A list of 2-element lists, e.g. [[21, 19], [29, 30], [15, 4]].
+              First element is home team, second away team.
+network_team1_left Position of the home team.
+              true: the home team is one the left
+              false: he away team is on the left
+              null: Undetermined (e.g. match not yet started)
+              undefined: Unsupported by backend
+network_team1_serving Which team is currently serving
+              true: the home team is serving
+              false: he away team is serving
+              null: Undetermined (e.g. match not yet started)
+              undefined: Unsupported by backend
+network_teams_player1_even An array, indicating whether the first player is on the right side.
+              e.g. [true, false] if the first home team player is on the right side.
+              true: The first player is one the right. In doubles, the second player is on the left.
+              false: The first player is one the left. In doubles, the second player is on the right.
+              null: Undetermined (e.g. match not started)
+              undefined: Unsupported by backend
+
+Press
+=====
+
+team_id is always 0: home team, 1: away_team.
+player_id is the index into the players array of setup.teams (0 in singles).
+
+umpire_name      Name of the umpire who took over this match, starting with this press.
+service_judge_name Name of the service judge who took over this match, starting with this press.
+court_id         ID of the court that this match is being played on, starting with this press.
+timestamp*       UNIX timestamp when the button was pressed, times 1000 (i.e. ms since 1970-01-01).
+type*            What kind of button has been pressed. Determines the other keys.
+ "pick_side"     Who plays on which side.
+    team1_left*    (true: home team left, false: home team right)
+ "pick_server"   Who is serving.
+    team_id*
+    player_id*
+ "pick_receiver" Who is receiving (optional in singles).
+    team_id*
+    player_id*
+ "love-all"      Start of match time (end of initial announcement)
+ "postgame-confirm"     Confirmation after announcement at end of game
+ "postmatch-confirm"    Confirmation after announcement at end of match
+ "postinterval-confirm" Resuming play after an interval
+ "score"         A normal rally has been won.
+    side*          Either "left" or "right", depending on who won the rally.
+ "overrule"      Line judge has been overruled (O in scoresheet)
+ "referee"       Referee has been called (R in scoresheet)
+ "correction"    Incorrect server/receiver has been corrected (C in scoresheet)
+    team_id*       0: home team was incorrect, 1: away team was incorrect
+ "yellow-card"   Warning for misconduct (yellow card).
+    team_id*
+    player_id*
+ "red-card"      Fault for misconduct (red card).
+    team_id*
+    player_id*
+ "injury"        A player has been injured (I on scoresheet, timer will run)
+    team_id*
+    player_id*
+ "injury-resume" Play resumes after an injury
+ "retired"       Player resigns. ("Retired" on scoresheet)
+    team_id*
+    player_id*
+ "disqualified"  Black card. ("Disqualified" on scoresheet)
+    team_id*
+    player_id*
+ "suspension"   Interruption of game, e.g. due to power failure. ("S" on scoresheet)
+ "resume"       Resume play after interruption. Duration will be recorded on scoresheet.
+ "shuttle"      Shuttlecock given out to the players. Total count will be recorded on scoresheet.
+ "editmode_change-ends"  Manual change of ends during the match.
+ "editmode_switch-sides" Manual change of who's playing left and who's right.
+    team_id*
+ "editmode_change-serve" Manual change of which side is serving.
+ "editmode_set-score"    Manual edit of the current score.
+    by_side*      Boolean, determines the format of score.
+    score*        The new score of the current game.
+                  If by_side then {left: 19, right: 18}.
+                  Otherwise [19, 18], where the first value is the home team's score.
+ "editmode_set-finished_games" Manual change of the scores of past games.
+                               Can also be used to invent or ignore past games.
+    by_side*      Boolean, determines the format of scores.
+    scores*       An array of the scores of the past games.
+                  If by_side then [{left: 19, right: 18}].
+                  Otherwise [[19, 18]], where the first value of each subarray is the home team's score.
+                  Number of items can be different from actual number of sets.
+                  For instance, to start at 21:19 18:21 in the third game right away, call with
+                  scores: [[21, 19], [18, 21]].
+ "timer_restart" Restart the current (interval/warmup) timer.
+ "walkover"      Record a walkover, i.e. no match due to one side missing.
+    team_id*      The team which is missing. The other team wins by default.
+ "note"          A plain-text note on the scoresheet.
+    val*          Human-readable string of what happened.
+
+Setup
+=====
+
+eventsheet_id      Language-independent ID of the match describing match type and number, e.g. "MS1".
+                   If missing match_name will be used.
+match_name*        Human-readable name of the match, e.g. "1. MS"
+short_name         Short human-readable name of the match, e.g. "MS1" (recommended if match_name is 10+ chars)
+match_id*          (Globally) unique ID, e.g. "20160825-Bundesliga-finale-MS1"
+match_num          Match number in a tournament context.
+teams*             An array (0: home team, 1: away team) of Team.
+is_doubles*        Boolean key. false => singles, true => mixed/doubles
+counting*          Scoring system.
+                   See the documentation on event for possible values.
+                   Can be left out if the league_key or counting property of the event is set.
+date               Human-readable official day of match, e.g. "12.3.2017".
+                   Copied over from the date property of the event.
+umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
+service_judge_name Name of the service judge assigned to this match.
+court_id           ID of the court this match is played on.
+warmup             Warmup time rules. Values are:
+   "bwf-2016"       BWF laws starting June 2016 (120s total, ready to play after 90s)
+   "legacy"         120 seconds warmup time. (Default when the key is missing)
+   "none"           No warmup time.
+scheduled_time_str Official start time of the match, e.g. "09:00".
+scheduled_date     Official date of the match in ISO8601, e.g. "2019-05-30".
+
+The following keys are copied over from the event (see there for documentation):
+counting, league_key, tournament_name, event_name, team_competition, nation_competition, away_first
+
+These keys can also be set manually on a match, for example if the match is not connected to any event, or the match setup properties differ from the event.
+
+Team
+====
+
+name     The team, club, or country name the player is competing for, e.g. "TV Refrath".
+         Required when team_competition is set in match setup.
+players* Array of Player (1 element in singles, 2 in doubles/mixed).
+
+Player
+======
+
+firstname    Given name ("Viktor"). If present lastname must be present as well.
+lastname     Surname ("Axelsen"). If present firstname must be set as well.
+name*        Full name of the player ("Viktor Axelsen")
+gender       "m" or "f". If missing this is guessed by eventutils.guess_gender.
+nationality  Three-digit country code according to IOC/FIFA, like "DEU" (Germany) or "FRA" (France)
+ranking      An integer denoting the ranking number in singles (and default in doubles).
+ranking_d    An integer denoting the ranking number in doubles, if differing from the one in singles.
+ranking_team The ID of the team the player is ranked in.
+textid       Human-readable ID of this player (e.g. "01-062459" or "50858")
+regular      Boolean, whether this player is considered a regular player according to federation regulations.
+
+Umpire
+======
+Note: This object definition is currently not used in bup.
+
+firstname    Given name ("Jörg"). If present lastname must be present as well.
+lastname     Surname ("Hupertz"). If present firstname must be set as well.
+name*        Full name of the official ("Jörg Hupertz")
+nationality  Three-digit country code according to IOC/FIFA, like "GER" (Germany) or "FRA" (France)
+

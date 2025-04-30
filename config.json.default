@@ -1,0 +1,6 @@
+{
+	"port": 4000,
+	"bup_location": "static/bup/downloaded/",
+	"bup_index": "index.html",
+	"report_errors": true
+}
