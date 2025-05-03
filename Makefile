@@ -50,7 +50,7 @@ bupdate:
 
 install-bup-dev:
 	if test -e ${BUPDEV} ; then cd ${BUPDEV} && git pull; fi
-	if test '!' -e ${BUPDEV} ; then git clone https://github.com/lule75/bup.git ${BUPDEV} && cd static/bup/dev && make download-libs; fi
+	if test '!' -e ${BUPDEV} ; then git clone https://github.com/lule75/bupdev.git ${BUPDEV} && cd static/bup/dev && make download-libs; fi
 
 install-service:
 	id -u bts >/dev/null 2>&1 || useradd -m --system bts
